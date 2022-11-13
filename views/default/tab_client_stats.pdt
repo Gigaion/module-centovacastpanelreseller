@@ -1,0 +1,72 @@
+<?php
+	if (isset($module_row->meta->usessl) && $module_row->meta->usessl == 'false' && isset($module_row->meta->hostname) && $module_row->meta->hostname != '') {
+		$http = 'http://';
+		$port = '2199';;
+	}
+	elseif (isset($module_row->meta->usessl) && $module_row->meta->usessl == 'true' && isset($module_row->meta->hostname) && $module_row->meta->hostname != '') {
+		$http = 'https://';
+		$port = '2199';
+	}
+	else {
+		$http = 'http://';
+		$port = '2199';
+	}
+?>
+<h4><?php $this->_('Centovacastpanelreseller.tab_stats');?></h4>
+<div class="table-responsive">
+	<table class="table table-curved table-striped">
+		<thead>
+			<tr>
+				<th style="width: 50%;"><?php $this->_('Centovacastpanelreseller.tab_stats.info_heading.field');?></th>
+				<th><?php $this->_('Centovacastpanelreseller.tab_stats.info_heading.value');?></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><?php $this->_('Centovacastpanelreseller.tab_stats.info.radiousername');?></td>
+				<td><?php $this->Html->_($service_fields->radiousername);?></td>
+			</tr>
+			<tr>
+				<td><?php $this->_('Centovacastpanelreseller.tab_stats.info.radiopassword');?></td>
+				<td><?php $this->Html->_($service_fields->radiopassword);?></td>
+			</tr>
+			<tr>
+				<td><?php $this->_('Centovacastpanelreseller.tab_stats.info.hostname');?></td>
+				<td><?php $this->Html->_($module_row->meta->hostname);?></td>
+			</tr>
+			<tr>
+				<td><?php $this->_('Centovacastpanelreseller.tab_stats.info.loginlink');?></td>
+				<td>
+					<a href="<?php echo $http.$module_row->meta->hostname.':'.$port; ?>" target="_blank">
+						<?php echo $http.$module_row->meta->hostname.':'.$port; ?>
+					</a>
+				</td>
+			</tr>
+			<tr>
+				<td><?php $this->_('Centovacastpanelreseller.tab_stats.info.loginbutton');?></td>
+				<td>
+					<form action="<?php echo $http.$module_row->meta->hostname.':'.$port; ?>/login/index.php" target="_blank" method="post">
+						<input id="login_form" type="hidden" name="login_form" value="1" />
+						<input id="remember" type="hidden" name="remember" value="1" />
+						<input id="login" type="hidden" name="login" value="Login" />
+						<input id="username" type="hidden" name="username" value="<?php echo $service_fields->radiousername; ?>" />
+						<input id="password" type="hidden" name="password" value="<?php echo $service_fields->radiopassword; ?>" />
+						<input id="login" type="submit" value="CentovaCastPanel Login" />
+					</form>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<p align="center">
+						<strong>
+							<font color="red">
+								** <?php $this->_('Centovacastpanelreseller.tab_stats.info.passwordwarning1');?> **<br />
+							</font>
+							<?php $this->_('Centovacastpanelreseller.tab_stats.info.passwordwarning2');?>
+						</strong>
+					</p>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
